@@ -2,15 +2,14 @@
 
 ## Intro
 
-Use the `./dsh-vpn.ps1` powershell script for Windows. This is a wrapper script around `stunnel`, `openvpn` and `openssl`. 
-
+Use the `./dsh-vpn.ps1` powershell script for Windows. This is a wrapper script around `stunnel`, `openvpn` and `openssl`.
 
 ## Client Requirements
 
 - OpenVPN tested with [2.4.x] (can be downloaded from www.openvpn.net)
 - OpenSSL hard requirement >= 1.0.0 (command: openssl version)
 - Stunnel tested with 5.44 and 5.56 (can be downloaded from www.stunnel.org)
- 
+
 ## Notes
 
 - Requires the tenant to have opened the port **1194** if they are behind a firewall.
@@ -18,43 +17,42 @@ Use the `./dsh-vpn.ps1` powershell script for Windows. This is a wrapper script 
 - Requires the tenant to know the tenant name, environment on which it runs and what the DNS suffix is.
 - For platforms with releases >= DSH-65
 
-
 ## Set up
+
 1. Unzip the package in a folder on your machine
-2. Initialize basic configuration.This will create a directory under ${HOME}/.vpn/ where all the configuration files for the VPN will reside: 
+2. Initialize basic configuration.This will create a directory under ${HOME}/.vpn/ where all the configuration files for the VPN will reside:
 
-	`./dsh-vpn.ps1 init `
+   `./dsh-vpn.ps1 init`
 
->REMARK: this step needs to be done only once
+   >REMARK: this step needs to be done only once
 
-3. Configure your VPN connection: 
+3. Configure your VPN connection:
 
-	`./dsh-vpn.ps1 create`
- 	
-	Enter your:
-	- Tenant name (in lowercase)
-	- Environment 
-	- DNS suffix 
-	- VPN User [=admin]
-	- VPN Password
+   `./dsh-vpn.ps1 create`
 
-**You can derive the environment and the DNS suffix by looking at the DSH Console's URL:**
-  `https://console.<env>.<dns-suffix>`
+   Enter your:
+   - Tenant name (in lowercase)
+   - Environment
+   - DNS suffix
+   - VPN User [=admin]
+   - VPN Password
 
->REMARK: this step needs to be done only once
+   **You can derive the environment and the DNS suffix by looking at the DSH Console's URL:** `https://console.<env>.<dns-suffix>`
 
-4. Set up VPN connection: 
+   >REMARK: this step needs to be done only once
 
-	`./dsh-vpn.ps1 connect`
+4. Set up VPN connection:
 
-> Proof that VPN connection is setup correctly is that the stunnel icon and OpenVPN icon is showing in the Windows background processes (typically in the right lower corner).
+   `./dsh-vpn.ps1 connect`
 
-5. Terminate the VPN connection: 
+   > Proof that VPN connection is setup correctly is that the stunnel icon and OpenVPN icon is showing in the Windows background processes (typically in the right lower corner).
 
-	`./dsh-vpn.ps1 disconnect`
+5. Terminate the VPN connection:
 
+   `./dsh-vpn.ps1 disconnect`
 
 ## Testing DNS resolution
+
 ### Working
 
 ```sh
@@ -70,13 +68,12 @@ Address:  92.242.132.16 # random public IP
 
 ## Other useful commands
 
-- the delete the tenant VPN settings for 1 particular tenant: 
+- the delete the tenant VPN settings for 1 particular tenant:
 `./dsh-vpn.ps1 clean`
 - the delete all the VPN settings and clear the ${HOME}/.vpn directory:
 `./dsh-vpn.ps1 purge`
 - the view the config files and open the directory where they are located:
 `./dsh-vpn.ps1 config`
-
 
 ## Commons Issues
 
@@ -93,3 +90,5 @@ Address:  92.242.132.16 # random public IP
    - This usually means that the CA server is down/starting. Try downloading the CA using your browser. When it starts working clean and and re init the tenant. If the issue persists contact support.
 5. AUTH: Received control message: AUTH_FAILED
    - The authentication has failed, possibly you have the wrong user/password configured or they have changed.
+6. Script returns UnauthorizedAccess
+   - You must allow the script to run. Open an Powershell window in Administrator mode and run `Set-ExecutionPolicy ByPass`

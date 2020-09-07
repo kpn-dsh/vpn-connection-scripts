@@ -2,8 +2,7 @@
 
 ## Intro
 
-Use the `./dsh-vpn.sh` shell script for MacOS and Linux. This is a wrapper script around `stunnel`, `openvpn` and `openssl`. 
-
+Use the `./dsh-vpn.sh` shell script for MacOS and Linux. This is a wrapper script around `stunnel`, `openvpn` and `openssl`.
 
 ## Client Version Requirements
 
@@ -18,39 +17,35 @@ Use the `./dsh-vpn.sh` shell script for MacOS and Linux. This is a wrapper scrip
 - Requires the tenant to know the tenant name, environment on which it runs and what the DNS suffix is.
 - For platforms with releases >= DSH-65
 
-
-
 ## Set up
+
 1. Untar the package in a folder on your machine
-2. Initialize basic configuration.This will create a directory under ${HOME}/.vpn/ where all the configuration files for the VPN will reside: 
+2. Initialize basic configuration.This will create a directory under ${HOME}/.vpn/ where all the configuration files for the VPN will reside:
 
-	`./dsh-vpn.sh init `
+   `./dsh-vpn.sh init`
 
->REMARK: this step needs to be done only once
+   >REMARK: this step needs to be done only once
 
-3. Configure your VPN connection: 
+3. Configure your VPN connection:
 
-	`./dsh-vpn.sh create`
- 	
-	Enter your:
-	- Tenant name (in lowercase)
-	- Environment 
-	- DNS suffix 
-	- VPN User [=admin]
-	- VPN Password
+   `./dsh-vpn.sh create`
 
-**You can derive the environment and the DNS suffix by looking at the DSH Console's URL:**
-  `https://console.<env>.<dns-suffix>`
+   Enter your:
+   - Tenant name (in lowercase)
+   - Environment
+   - DNS suffix
+   - VPN User [=admin]
+   - VPN Password
 
->REMARK: this step needs to be done only once
+   **You can derive the environment and the DNS suffix by looking at the DSH Console's URL:** `https://console.<env>.<dns-suffix>`
+   >REMARK: this step needs to be done only once
 
-4. Set up VPN connection: 
+4. Set up VPN connection:
 
-	`./dsh-vpn.sh connect <tenant-name> <env>`
-5. (optional) If you want to run your application locally on your local PC and connect to DSH, you need to manually a script that will retrieve and configure the Kafka security settings: 
+   `./dsh-vpn.sh connect <tenant-name> <env>`
+5. (optional) If you want to run your application locally on your local PC and connect to DSH, you need to manually a script that will retrieve and configure the Kafka security settings:
 
-	`./getjks.sh`
-
+   `./getjks.sh`
 
 ## Testing DNS resolution
 
@@ -102,11 +97,10 @@ vpn.<tenant>.marathon.mesos
 ## Other useful commands
 
 - To stop the VPN Connection, press CTRL+C
-- the delete the tenant VPN settings for 1 particular tenant: 
+- the delete the tenant VPN settings for 1 particular tenant:
 `./dsh-vpn.sh clean`
 - the delete all the VPN settings and clear the ${HOME}/.vpn directory:
 `./dsh-vpn.sh purge`
-
 
 ## Commons Issues
 
@@ -121,9 +115,10 @@ vpn.<tenant>.marathon.mesos
    - This is an indication that stunnel has crashed badly or you have another service using this port. Easiest fix is to restart your PC. Otherwise you need to free or switch to a different port.
 4. The remote server returned an error: (502)
    - This usually means that the CA server is down/starting. Try downloading the CA using your browser. When it starts working clean and and re init the tenant. If the issue persists contact support.
-5. No configuration yet for <tenantname> <env>. -- Even when it exists.
+5. No configuration yet for `<tenantname> <env>`. -- Even when it exists.
    - This can happen if the script has different user during execution, for example if ran with sudo elevation
 6. AUTH: Received control message: AUTH_FAILED
    - The authentication has failed, possibly you have the wrong user/password configured or they have changed.
-
-
+7. On Unix network stopped working or too slow after VPN disconnect
+    - This is an indication that the `/etc/resolv.conf` file needs to be cleaned.
+    - This might happen if your shell scripts are old (update the scripts under `~/.vpn`)
