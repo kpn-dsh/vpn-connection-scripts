@@ -74,6 +74,8 @@ Address:  92.242.132.16 # random public IP
 `./dsh-vpn.ps1 purge`
 - the view the config files and open the directory where they are located:
 `./dsh-vpn.ps1 config`
+- update the CA certificate
+`./dsh-vpn.ps1 update-ca`
 
 ## Commons Issues
 
@@ -92,3 +94,7 @@ Address:  92.242.132.16 # random public IP
    - The authentication has failed, possibly you have the wrong user/password configured or they have changed.
 6. Script returns UnauthorizedAccess
    - You must allow the script to run. Open an Powershell window in Administrator mode and run `Set-ExecutionPolicy ByPass`
+   - Different approach not using 'Bypass', see https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7#example-7--unblock-a-script-to-run-it-without-changing-the-execution-policy
+7. Can't setup VPN Connection
+    - with every DSH relaunch, CA's are renewed thus the local CA needs to be updated by running  ./dsh-vpn.ps1 update-ca
+
