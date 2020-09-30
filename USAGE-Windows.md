@@ -20,13 +20,7 @@ Use the `./dsh-vpn.ps1` powershell script for Windows. This is a wrapper script 
 ## Set up
 
 1. Unzip the package in a folder on your machine
-2. Initialize basic configuration.This will create a directory under ${HOME}/.vpn/ where all the configuration files for the VPN will reside:
-
-   `./dsh-vpn.ps1 init`
-
-   >REMARK: this step needs to be done only once
-
-3. Configure your VPN connection:
+2. Configure your VPN connection:
 
    `./dsh-vpn.ps1 create`
 

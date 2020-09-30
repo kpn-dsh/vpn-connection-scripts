@@ -20,13 +20,7 @@ Use the `./dsh-vpn.sh` shell script for MacOS and Linux. This is a wrapper scrip
 ## Set up
 
 1. Untar the package in a folder on your machine
-2. Initialize basic configuration.This will create a directory under ${HOME}/.vpn/ where all the configuration files for the VPN will reside:
-
-   `./dsh-vpn.sh init`
-
-   >REMARK: this step needs to be done only once
-
-3. Configure your VPN connection:
+2. Configure your VPN connection:
 
    `./dsh-vpn.sh create`
 
