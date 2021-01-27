@@ -9,13 +9,13 @@ Use the `./dsh-vpn.sh` shell script for MacOS and Linux. This is a wrapper scrip
 - OpenVPN tested with [2.4.x - 3.0.0] (command: openvpn --version)
 - OpenSSL hard requirement >= 1.0.0 (command: openssl version)
 - stunnel tested with 5.44 and 5.56 (command: stunnel -version)
+- wget
 
 ## Notes
 
 - Requires the tenant to have opened the port **1194** if they are behind a firewall.
 - Requires the tenant to know the VPN password which can be retrieved through the DSH Console->Secrets
 - Requires the tenant to know the tenant name, environment on which it runs and what the DNS suffix is.
-- For platforms with releases >= DSH-65
 
 ## Set up
 
